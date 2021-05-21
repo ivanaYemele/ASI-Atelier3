@@ -1,0 +1,5 @@
+jeu\user\repository\UserRepository.class
+jeu\user\UserApplication.class
+jeu\user\model\User.class
+jeu\user\rest\UserRestCtr.class
+jeu\user\service\UserService.class
