@@ -5,19 +5,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import jeu.transaction.model.*;
+import jeu.transaction.repository.*;
+import jeu.transaction.rest.*;
+import jeu.transaction.service.TransaService;
 
 @RestController
 public class TransaRestCtr {
 	
 	@Autowired
-	private TransacService transacService;
+	private TransaService transacService;
 	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private CardService cardService;
+
 	
 	//On récupère la somme restante au joueur
 	//En fonction de son argent restant, l'utilisateur peut ou non acheter une carte

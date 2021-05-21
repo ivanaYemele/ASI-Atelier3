@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import asi.game.cartes.model.Card;
-import asi.game.cartes.model.User;
-import asi.game.cartes.repository.CardRepository;
+import jeu.card.model.Card;
+import jeu.card.model.*;
+import jeu.card.repository.CardRepository;
 
 
 @Service
@@ -17,10 +17,7 @@ public class CardService {
 	
 	@Autowired
 	private CardRepository cardRepository;
-	
-	@Autowired
-	private UserService userService;
-	
+
 	//Recuperation d'une carte specifique à partir dde son id
 	public Card getCard(Integer id) {
 		Optional<Card> cardOpt = cardRepository.findById(id);

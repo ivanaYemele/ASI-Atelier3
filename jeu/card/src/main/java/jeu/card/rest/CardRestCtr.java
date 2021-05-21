@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import asi.game.cartes.model.Card;
-import asi.game.cartes.service.CardService;
+import jeu.card.*;
+import jeu.card.CardApplication;
+import jeu.card.model.Card;
+import jeu.card.service.CardService;
+
 
 @RestController
 public class CardRestCtr {

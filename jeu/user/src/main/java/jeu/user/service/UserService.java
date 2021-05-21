@@ -9,23 +9,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jeu.user.model.User;
+
+import org.springframework.web.client.RestTemplate;
+
+import jeu.user.repository.*;
+
 
 
 @Service
 public class UserService {
-	
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private CardService cardService;
-	
-	@Autowired
-	private TransacService transacService;
-	
+
 	
 	//Ajout d'un nouvel utilisateur dans la BDD
 	public void addUser (User user) {
+		
 		User createdUser = userRepository.save(user);
 		//System.out.println(createdUser);
 		System.out.println("User created");
