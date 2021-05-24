@@ -1,9 +1,12 @@
 package jeu.transaction.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import jeu.transaction.model.*;
 import jeu.transaction.repository.*;
@@ -36,6 +39,11 @@ public class TransaRestCtr {
 
 	@RequestMapping("/sell/{iduser}/{idcard}") 
 	public void sellCard(@PathVariable Integer iduser, @PathVariable Integer idcard) {
+		RestTemplate restTemplate = new RestTemplate();
+		String fooResourceUrl = "http://localhost:8080/user/service/UserService";
+		ResponseEntity<String> response = restTemplate.getForEntity(fooResourceUrl + "/1", String.class);
+		assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));   
+		
 		User u = userService.getUser(iduser);
 		Card card = cardService.getCard(idcard);
 		transacService.SellCard(u, card);

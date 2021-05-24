@@ -26,11 +26,12 @@ public class UserService {
 	
 	//Ajout d'un nouvel utilisateur dans la BDD
 	public void addUser (User user) {
-		
 		User createdUser = userRepository.save(user);
 		//System.out.println(createdUser);
 		System.out.println("User created");
 	}
+	
+	
 
 	//Récupération d'un utilisateur spécifique
 	public User getUser(Integer iduser) {
@@ -49,6 +50,7 @@ public class UserService {
 		
 	}
 
+	
 	public User getConnected(String name, String mdp) {
 		Optional<User> userOpt = userRepository.findByNameAndMdp(name,mdp);
 		if (userOpt.isPresent()) {

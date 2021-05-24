@@ -1,4 +1,4 @@
-package jeu.authentification.model;
+package jeu.user.model;
 
 
 public class LoginDTO {
@@ -7,10 +7,9 @@ public class LoginDTO {
 	
 	
 	public LoginDTO() {
-	
+		
 	}
-	
-	
+
 	public LoginDTO(String name , String mdp) {
 		this.name = name;
 		this.mdp = mdp;
