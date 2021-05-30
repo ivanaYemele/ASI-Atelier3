@@ -38,13 +38,19 @@ public class UserRestCtr {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/connexion")
-	public int login(String name, String mdp) {
+	public User login() {
 		//On récupère les information de l'utilisateur puis on vérifie si elles sont correcte		
 		//User user = userService.getConnected(name,mdp);
-		LoginDTO logue  = restTemplate.getForObject("http://localhost:8081/connect", LoginDTO.class);
-		User user = userService.getConnected(logue.getName(), logue.getmdp());
-		int id = user.getId();
-		return id;
+		//LoginDTO logue  = restTemplate.getForObject("http://localhost:8081/connect", LoginDTO.class);
+		User user = new User ();
+		return user;
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/send")
+
+	public UserService send () {
+		return userService;
+		
 	}
 	
 }

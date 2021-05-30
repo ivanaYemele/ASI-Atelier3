@@ -10,11 +10,7 @@ public class LoginDTO {
 		
 	}
 
-	public LoginDTO(String name , String mdp) {
-		this.name = name;
-		this.mdp = mdp;
-	}
-	
+
 
 	public String getName() {
 		return name;

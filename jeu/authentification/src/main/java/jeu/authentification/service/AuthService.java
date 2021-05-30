@@ -23,13 +23,13 @@ public class AuthService {
 	RestTemplate restTemplate = new RestTemplate ();
 
 	//Gestion de la connexion de l'utilisateur
-	
 	public LoginDTO login(String name, String mdp) {
-		//On récupère les information de l'utilisateur puis on vérifie si elles sont correcte
-		LoginDTO log = new LoginDTO (name, mdp);
+		LoginDTO log = new LoginDTO ();
+		log.setName(name);
+		log.setmdp(mdp);
 		return log ; 	
-	}
 
+}
 }
 
 
