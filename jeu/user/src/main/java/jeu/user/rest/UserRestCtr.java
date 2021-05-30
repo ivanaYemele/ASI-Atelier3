@@ -1,7 +1,5 @@
 package jeu.user.rest;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import jeu.user.model.LoginDTO;
+
 import jeu.user.model.User;
 import jeu.user.service.UserService;
 
@@ -37,21 +35,17 @@ public class UserRestCtr {
 		return u;
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/connexion")
-	public User login() {
+	
+	@RequestMapping(method=RequestMethod.GET,value="connexion/{name}/{mdp}")
+	public int login( @PathVariable String name , @PathVariable String mdp ) {
 		//On récupère les information de l'utilisateur puis on vérifie si elles sont correcte		
-		//User user = userService.getConnected(name,mdp);
-		//LoginDTO logue  = restTemplate.getForObject("http://localhost:8081/connect", LoginDTO.class);
-		User user = new User ();
-		return user;
+		User user = userService.getConnected(name,mdp);
+		int id = user.getId();
+		return id;
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/send")
 
-	public UserService send () {
-		return userService;
-		
-	}
+
 	
 }
 

@@ -32,7 +32,6 @@ public class UserService {
 	}
 	
 	
-
 	//Récupération d'un utilisateur spécifique
 	public User getUser(Integer iduser) {
 		Optional<User> userOpt = userRepository.findById(iduser);
