@@ -33,7 +33,7 @@ public class TransaService {
 		
 		//on met à jour la somme d'argent restante du joueur
 		u.setMoney(achat);
-		restTemplate.put("http://localhost:8082/umoney/" + u.getId(), u);
+		restTemplate.put("http://localhost:8082/updateMoney", u);
 		
 		
 	}
@@ -49,7 +49,7 @@ public class TransaService {
 		
 		//on met à jour la somme d'argent du joueur
 		u.setMoney(vente);	
-		restTemplate.put("http://localhost:8082/umoney/" + u.getId(), u);
+		restTemplate.put("http://localhost:8082/updateMoney/", u);
 
 	}
 	
