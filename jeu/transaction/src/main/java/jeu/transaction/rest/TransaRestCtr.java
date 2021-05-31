@@ -18,7 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
+@RestController
 public class TransaRestCtr {
 	
 	@Autowired
