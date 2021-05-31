@@ -33,8 +33,7 @@ public class TransaService {
 		
 		//on met à jour la somme d'argent restante du joueur
 		u.setMoney(achat);
-		boolean result  = restTemplate.getForObject("http://localhost/User/" + u ,boolean.class); //va vers la fonction update money dans userService
-		
+		restTemplate.put("http://localhost:8082/umoney/" + u.getId(), u);
 		
 		
 	}
@@ -50,7 +49,7 @@ public class TransaService {
 		
 		//on met à jour la somme d'argent du joueur
 		u.setMoney(vente);	
-		boolean result  = restTemplate.getForObject("http://localhost/User/" + u ,boolean.class); //appel de la fonction updatemoney dans userService
+		restTemplate.put("http://localhost:8082/umoney/" + u.getId(), u);
 
 	}
 	
