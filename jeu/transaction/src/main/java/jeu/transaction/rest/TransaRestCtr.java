@@ -1,35 +1,41 @@
 package jeu.transaction.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import jeu.transaction.model.*;
-import jeu.transaction.repository.*;
-import jeu.transaction.rest.*;
+import jeu.transaction.model.Card;
+import jeu.transaction.model.User;
 import jeu.transaction.service.TransaService;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-@RestController
+
 public class TransaRestCtr {
 	
 	@Autowired
 	private TransaService transacService;
-	
+	RestTemplate restTemplate = new RestTemplate();
 
 	
 	//On récupère la somme restante au joueur
 	//En fonction de son argent restant, l'utilisateur peut ou non acheter une carte
 	@RequestMapping("/buy/{iduser}/{idcard}") 
 	public void checkMoney(@PathVariable Integer iduser, @PathVariable Integer idcard) {
-		User u = userService.getUser(iduser);
-		Card card = cardService.getCard(idcard);
-		double umoney = u.getMoney();
+		User user  = restTemplate.getForObject("http://localhost:8082/users/" + iduser,User.class);
+		Card card  = restTemplate.getForObject("http://localhost:8083/cards/" + idcard,Card.class);
+		
+		double umoney = user.getMoney();
 		if (umoney >= card.getPrice()) {
-			transacService.buyCard(u,card);
+			transacService.buyCard(user,card);
 			System.out.println("You have a new card");
 		}
 		else {
@@ -39,17 +45,14 @@ public class TransaRestCtr {
 
 	@RequestMapping("/sell/{iduser}/{idcard}") 
 	public void sellCard(@PathVariable Integer iduser, @PathVariable Integer idcard) {
-		RestTemplate restTemplate = new RestTemplate();
-		String fooResourceUrl = "http://localhost:8080/user/service/UserService";
-		ResponseEntity<String> response = restTemplate.getForEntity(fooResourceUrl + "/1", String.class);
-		assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));   
-		
-		User u = userService.getUser(iduser);
-		Card card = cardService.getCard(idcard);
-		transacService.SellCard(u, card);
+		User user  = restTemplate.getForObject("http://localhost:8082/users/" + iduser,User.class);
+		Card card  = restTemplate.getForObject("http://localhost:8083/cards/" + idcard,Card.class);
+		transacService.SellCard(user, card);
 		System.out.println("Card sold");
 		
 	}
+	
+
 	
 	
 	

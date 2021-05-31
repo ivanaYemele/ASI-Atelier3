@@ -22,6 +22,7 @@ public class CardService {
 	public Card getCard(Integer id) {
 		Optional<Card> cardOpt = cardRepository.findById(id);
 		if (cardOpt.isPresent()) {
+			System.out.println("Card returned");
 			return cardOpt.get();
 		}else {
 			return null;

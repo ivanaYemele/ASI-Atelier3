@@ -1,19 +1,30 @@
 package jeu.transaction.service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import jeu.transaction.model.Card;
+import jeu.transaction.model.User;
+
+
 
 
 @Service
 public class TransaService {
 	
-	@Autowired
-	private UserService userService;
 	
-	@Autowired
-	private CardService cardService;
 
-	//Le joeur peut acheter sa carte
+	private TransaService transacService;
+	RestTemplate restTemplate = new RestTemplate();
+	//Le joueur peut acheter sa carte
+	
 	public void buyCard(User u, Card card) {
 		double usrmoney = u.getMoney();
 		double cardprice = card.getPrice();
@@ -22,10 +33,13 @@ public class TransaService {
 		
 		//on met à jour la somme d'argent restante du joueur
 		u.setMoney(achat);
-		userService.updateMoney(u);
+		boolean result  = restTemplate.getForObject("http://localhost/User/" + u ,boolean.class); //va vers la fonction update money dans userService
+		
 		
 		
 	}
+	
+
 
 	public void SellCard(User u, Card card) {
 		double usrmoney = u.getMoney();
@@ -36,7 +50,10 @@ public class TransaService {
 		
 		//on met à jour la somme d'argent du joueur
 		u.setMoney(vente);	
-		userService.updateMoney(u);
-	}
+		boolean result  = restTemplate.getForObject("http://localhost/User/" + u ,boolean.class); //appel de la fonction updatemoney dans userService
 
+	}
+	
+	
+	
 }
